@@ -2,28 +2,14 @@ import React from 'react'
 import {withRouter} from "next/router";
 import Router from 'next/router';
 import Link from 'next/link';
-import nProgress from 'nprogress';
-import "../node_modules/nprogress/nprogress.css";
-import {FcShop} from 'react-icons/fc';
 import {MdLogout} from 'react-icons/md';
-import { FaHome } from 'react-icons/fa';
+import { FaCalculator, FaHome } from 'react-icons/fa';
 import { logout } from '../actions/auth';
 import { API_NAME } from '../config';
 
 
-Router.onRouteChangeStart = url => nProgress.start();
-Router.onRouteChangeComplete = url => nProgress.done();
-Router.onRouteChangeError = url => nProgress.done();
 
 
-
-const styleChange = (router,key) => {
-    if (router.pathname === key){
-      return {color:"white" , textShadow:"orange", backgroundColor:"orange"}
-    }else{
-      return {color:"primary"}
-    }
-}
 
 const Sidebar = ({router}) => {
   return (
@@ -39,6 +25,15 @@ const Sidebar = ({router}) => {
                     <Link href="/Admin2/Dashboard">
                         <a>
                           <FaHome size={20} className={router.pathname === "/Admin2/Dashboard" ? "text-white rounded shadow-primary bg-orange-500": ""} />
+                        </a>
+                    </Link>
+                </button>
+            </div>
+            <div className={ router.pathname === "/Common/rcalculator" ? "bg-gray-800 rounded-l-xl relative before:absolutebefore:h-8 before:w-4 before:-top-8 before:rounded-br-xl before:right-0":""}>
+                <button className="p-4 my-4 mr-4 ml-3 rounded-xl">
+                    <Link href="/Common/rcalculator">
+                        <a>
+                          <FaCalculator size={20} className={router.pathname === "/Common/rcalculator" ? "text-white rounded shadow-primary bg-orange-500": ""} />
                         </a>
                     </Link>
                 </button>

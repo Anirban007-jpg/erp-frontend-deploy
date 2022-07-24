@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react'
 import Head from 'next/head';
 import { API_NAME } from '../../config';
-import Layout from '../../components/Layout';
+// import Layout from '../../components/Layout';
 import { getCookie, isAuth, logout } from '../../actions/auth';
 import Router from 'next/router';
 import Footer from '../../components/Footer';
+import Sidebar from '../../components/Sidebar';
+import StatsCard from '../../components/StatsCard';
 
 
 const Dashboard = () => {
@@ -39,10 +41,7 @@ const Dashboard = () => {
       }
 
          // page protection 2nd phase
-        if (isAuth() && isAuth().role === 'CMA'){
-          Router.push('/Admin2/Dashboard',null,{shallow:true});
-        }
-        else  if (isAuth() && isAuth().role === 'CA'){
+        if (isAuth() && isAuth().role === 'CA'){
             Router.push('/Admin/Dashboard');
         }
         else  if (isAuth() && isAuth().role === 'Taxpayer'){
@@ -52,7 +51,19 @@ const Dashboard = () => {
   return (
     <div>
         {head()}
-        <Layout/>
+        <div className="flex w-full min-h-screen font-sans bg-gray-800">
+          <Sidebar/>
+          <main className="flex flex-col flex-1 gap-6 p-4">
+            <header>
+              <h1 className="text-3xl font-semibold leading-loose text-white">Dashboard</h1>
+              <div className="text-gray-200">
+              {(new Date()).toLocaleString()}
+              </div>
+            </header>
+            <hr className="border-gray-700" />
+            <StatsCard/><hr className="border-gray-700"/>
+          </main>
+      </div>
         <div>
           <Footer/>
         </div>  

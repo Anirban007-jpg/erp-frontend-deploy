@@ -89,7 +89,7 @@ const LoginForm = () => {
                         </div>
                         <button className="w-full block bg-blue-500 hover:bg-blue-400 px-4 py-3 mt-6 rounded-lg font-bold text-white " type="submit">Log In</button>
                         <hr className="my-6 border-gray-500 w-full" />
-                        <button type="submit" class="w-full block bg-white border-gray-300 hover:bg-gray-100 focus:bg-gray-100 text-gray-900 font-semibold rounded-lg px-4 py-3 border">
+                        <button type="submit" className="w-full block bg-white border-gray-300 hover:bg-gray-100 focus:bg-gray-100 text-gray-900 font-semibold rounded-lg px-4 py-3 border">
                             <div className="flex items-center justify-center">
                                 <FaGoogle size={15}/>
                                 <span className="ml-4">
