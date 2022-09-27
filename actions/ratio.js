@@ -47,3 +47,18 @@ export const currentratiocal = data => {
         console.log(err);
     })
 }
+
+export const quickratiocal = data => {
+    return fetch(`${API}/ratio/calculator/quickratio`, {
+        method: 'POST',
+        headers:{
+            Accept: 'application/json',
+            'Content-Type' : 'application/json'
+        },
+        body: JSON.stringify(data)
+    }).then(response => {
+        return response.json();
+    }).catch(err => {
+        console.log(err);
+    })
+}

@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 
 import Link from 'next/link';
-import { cacl, currentratiocal } from '../../actions/ratio';
+import { cacl, currentratiocal } from '../actions/ratio';
 // value={current_deposits_savings_deposits} onChange={handleChange('current_deposits_savings_deposits')}
 
-const CurrentRatioCalculator = () => {
+const CurrentRatioCalculator = (props) => {
 
     const [values,setValues] = useState({
         OpeningStock:'0',
@@ -28,6 +28,7 @@ const CurrentRatioCalculator = () => {
         DraftInHand: '0',
         account_receivables: '',
         PE: '0',
+        NetWorkingCapital : '',
         AIGS: '0',
         Other_Current_Assets: '',
         D_I_T: '0',
@@ -71,7 +72,7 @@ const CurrentRatioCalculator = () => {
         D: '0',
         OLA: '0',
         Short_Term_Borrowings: '',
-        Current_Ratio: '',
+        Current_Ratio: 0,
         loading:false,
         error: '',
         click:false
@@ -86,6 +87,7 @@ const CurrentRatioCalculator = () => {
         LooseTools,
         IEI,
         Trade_Payables,
+        NetWorkingCapital,
         Creditors,
         BP,
         IPS,
@@ -214,10 +216,11 @@ const CurrentRatioCalculator = () => {
                 setValues({...values, error: response.error,loading: false});
             }
             else {
-                // console.log(response.result);
+                props.onSubmit1(response);
                 setValues({
                 ...values, 
                 click:true,
+                NetWorkingCapital: response.result.NetWorkingCapital,
                 Closing_Stock: response.result.Closing_Stock,
                 Inventory: response.result.Inventory,
                 account_receivables: response.result.account_receivables,    
@@ -235,7 +238,6 @@ const CurrentRatioCalculator = () => {
                 });
             }
         })
-
     }
     
     const handleSubmit1 = (e) => {
@@ -251,31 +253,31 @@ const CurrentRatioCalculator = () => {
                 console.log(response.error);
             }
             else{
+                props.onSubmit2(response)
                 setValues({...values, Current_Ratio: response.result.currentRatio});
             }
         })
     }
 
   return (
-    <div className="mt-2">
-        <form className="bg-gray-700 p-4 mt-4 mx-6 rounded-lg text-center " noValidate>
-            <h1 className="mt-2 text-xl text-black font-bold">CURRENT ASSETS</h1>
-            <hr />
-            <div className="mt-2 bg-sky-100 mr-2 ml-2 rounded-lg">
-                <div className="flex space-x-4 mr-2 ml-2 mt-2">
-                    <div className="relative mb-3 w-1/3">
+    <div className="mt-4">
+        <h1 className="font-bold text-2xl text-yellow-500">Current Ratio Calculator:</h1>
+        <form className="bg-gray-700 p-4 mt-4 mx-8 rounded-lg text-center" noValidate>
+            <div className="mt-8 bg-sky-100 mr-2 ml-2 rounded-lg">
+                <div className="flex space-x-4 mr-2 ml-2 mt-4">
+                    <div className="relative mb-3 w-1/3 mt-4">
                         <span className="text-sm font-bold mb-4">OPENING STOCK</span><br/>
                         <input type="text" placeholder="Enter Opening Stock" value={OpeningStock} onChange={handleChange("OpeningStock")} className="mt-4 px-3 py-3 font-bold text-black placeholder-slate-300 relative bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full pr-10"/>
                         <span className="leading-snug font-normal absolute text-center text-slate-300 bg-transparent rounded text-base items-center justify-center w-8 right-0 pr-3 py-3">
                         </span>
                     </div>
-                    <div className="relative items-stretch mb-3 w-1/3">
+                    <div className="relative items-stretch mb-3 w-1/3 mt-4">
                         <span className="text-sm font-bold mb-4">PURCHASES</span><br/>
                         <input type="text" placeholder="Enter Purchases made during the year" value={Purchase} onChange={handleChange("Purchase")} className="mt-4 px-3 py-3 placeholder-slate-300 font-bold text-black relative bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full pr-10"/>
                         <span className="leading-snug font-normal text-center text-slate-300 absolute bg-transparent rounded text-base items-center justify-center w-8 right-0 pr-3 py-3">
                         </span>
                     </div>
-                    <div className="relative items-stretch mb-3 w-1/3">
+                    <div className="relative items-stretch mb-3 w-1/3 mt-4">
                         <span className="text-sm font-bold mb-4">GOODS RETURNED AFTER PURCHASE</span><br/>
                         <input type="text" value={Purchase_Return} onChange={handleChange("Purchase_Return")} placeholder="Enter the value of goods returned" className="mt-4 px-3 py-3 text-black placeholder-slate-300 font-bold relative bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full pr-10"/>
                         <span className="leading-snug font-normal text-center text-slate-300 absolute bg-transparent rounded text-base items-center justify-center w-8 right-0 pr-3 py-3">
@@ -409,7 +411,7 @@ const CurrentRatioCalculator = () => {
                         <span className="leading-snug font-normal absolute text-center text-slate-300 bg-transparent rounded text-base items-center justify-center w-8 right-0 pr-3 py-3">
                         </span>
                     </div>
-                </div>
+                </div>  
                 <hr/>
                 <div className="flex space-x-4 mt-2 mr-2 ml-2">
                     <div className="relative mb-3 w-1/3">
@@ -531,17 +533,7 @@ const CurrentRatioCalculator = () => {
                     </div>
                 </div>
                 <br/>
-                <h1 className="text-blue-500 font-bold mt-2">Current Assets:</h1>
-                <div className="flex space-x-4 mt-2 mr-2 ml-2">
-                    <div className="relative mb-3 w-full">
-                        <input type="text" value={ca} placeholder="Current Assets(Auto-Calculated)" disabled className="mt-2 px-3 py-3 bg-gray-300 placeholder-slate-300 text-blue-500 font-bold relative rounded text-0.5xl border-0 shadow outline-none focus:outline-none focus:ring w-full pr-10"/>
-                        <span className="leading-snug font-normal absolute text-center text-red-500 bg-transparent rounded text-base items-center justify-center w-8 right-0 pr-3 py-3">
-                        </span>
-                    </div>
-                </div>
-                <br/>
             </div>
-            <h1 className="mt-8 text-xl text-black font-bold">CURRENT LIABILITIES</h1>
             <hr style={{'border': '1px solid white', 'marginTop':'4px'}} />
             <div className="mt-2 bg-stone-200 mr-2 ml-2 rounded-lg">
                 <div className="flex space-x-4 mr-2 ml-2 mt-2">
@@ -677,16 +669,15 @@ const CurrentRatioCalculator = () => {
                     </div>
                 </div>
                 <hr/>
-                <h1 className="mb-4 font-semibold text-yellow-500 mt-4">Short Term Borrowings:</h1>
                 <div className="flex space-x-4 mr-2 ml-2 mt-2">
                     <div className="relative mb-3 w-1/3">
-                    <span className="text-sm font-bold mb-4">LOAN REPAYABLE TO BANKS</span><br/>
+                    <span className="text-sm font-bold mb-4">BANK DEBTS PAYABLE WITHIN A YEAR</span><br/>
                         <input type="text" value={LRDB} onChange={handleChange('LRDB')} className="mt-4 px-3 py-3 placeholder-slate-300 text-black font-bold relative bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full pr-10"/>
                         <span className="leading-snug font-normal absolute text-center text-slate-300 bg-transparent rounded text-base items-center justify-center w-8 right-0 pr-3 py-3">
                         </span>
                     </div>
                     <div className="relative items-stretch mb-3 w-1/3">
-                        <span className="text-sm font-bold mb-4">LOAN REPAYABLE TO OTHER PARTIES</span><br/>
+                        <span className="text-sm font-bold mb-4">THIRD PARTY LOANS PAYABLE WITHIN A YEAR</span><br/>
                         <input type="text" value={LRDO} onChange={handleChange('LRDO')} className="mt-4 px-3 py-3 placeholder-slate-300 text-black font-bold relative bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full pr-10"/>
                         <span className="leading-snug font-normal absolute text-center text-slate-300 bg-transparent rounded text-base items-center justify-center w-8 right-0 pr-3 py-3">
                         </span>
@@ -713,10 +704,28 @@ const CurrentRatioCalculator = () => {
                     </div>
                 </div> 
                 <br/>
-                <h1 className="text-blue-500 font-bold mt-2">Current Liabilities:</h1>
+                <h1 className="text-blue-500 font-bold mt-2">CURRENT ASSETS:</h1>
+                <div className="flex space-x-4 mt-2 mr-2 ml-2">
+                    <div className="relative mb-3 w-full">
+                        <input type="text" value={ca} placeholder="Current Assets(Auto-Calculated)" disabled className="mt-2 px-3 py-3 bg-gray-300 placeholder-slate-300 text-blue-500 font-bold relative rounded text-0.5xl border-0 shadow outline-none focus:outline-none focus:ring w-full pr-10"/>
+                        <span className="leading-snug font-normal absolute text-center text-red-500 bg-transparent rounded text-base items-center justify-center w-8 right-0 pr-3 py-3">
+                        </span>
+                    </div>
+                </div>
+                <hr/>
+                <h1 className="text-blue-500 font-bold mt-2">CURRENT LIABILITIES:</h1>
                 <div className="flex space-x-4 mt-2 mr-2 ml-2">
                     <div className="relative mb-3 w-full">
                         <input type="text" value={cl} placeholder="Current Liabilities(Auto-Calculated)" disabled className="mt-2 px-3 py-3 bg-gray-300 placeholder-slate-300 text-blue-500 font-bold relative rounded text-0.5xl border-0 shadow outline-none focus:outline-none focus:ring w-full pr-10"/>
+                        <span className="leading-snug font-normal absolute text-center text-red-500 bg-transparent rounded text-base items-center justify-center w-8 right-0 pr-3 py-3">
+                        </span>
+                    </div>
+                </div>
+                <hr/>
+                <h1 className="text-blue-500 font-bold mt-2">WORKING CAPITAL:</h1>
+                <div className="flex space-x-4 mt-2 mr-2 ml-2">
+                    <div className="relative mb-3 w-full">
+                        <input type="text" value={NetWorkingCapital} placeholder="Net Working Capital(Auto-Calculated)" disabled className="mt-2 px-3 py-3 bg-gray-300 placeholder-slate-300 text-blue-500 font-bold relative rounded text-0.5xl border-0 shadow outline-none focus:outline-none focus:ring w-full pr-10"/>
                         <span className="leading-snug font-normal absolute text-center text-red-500 bg-transparent rounded text-base items-center justify-center w-8 right-0 pr-3 py-3">
                         </span>
                     </div>
@@ -727,14 +736,32 @@ const CurrentRatioCalculator = () => {
                 {/* Design this area*/}
                 {Current_Ratio}
             </div>
+            <div className="mt-20">
+                <h1 className="font-semibold text-white text-xl">Interpretation:</h1>
+                {Current_Ratio < 1.00 ? 
+                (
+                    <div className="mt-2">
+                        {Current_Ratio === 0 ? (
+                            <>
+                                
+                            </>
+                        ):(<span className="font-semibold"></span>)}
+                        
+                    </div>
+                ) : (
+                    <div className="mt-2">
+                        <span className="font-semibold"></span>
+                    </div>
+                )}
+            </div>
             <div className="mt-2 rounded-lg">
                 <button onClick={handleSubmit1} disabled={!click} className={!click ? "bg-gray-500 mt-2 mb-2 text-white w-full font-bold py-2 px-4 border-b-4 border-gray-700 rounded":"mt-2 bg-blue-500 mb-2 hover:bg-blue-400 text-white w-full font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"}>
-                    CALCULATE RATIO
+                    CALCULATE CURRENT RATIO
                 </button><br/>
                 <button onClick={handleSubmit} disabled={(click)} className={click ? "bg-gray-500 text-white mt-2 mb-2 w-full font-bold py-2 px-4 border-b-4 border-gray-700 rounded":'bg-blue-500 hover:bg-blue-400 text-white mt-2 mb-2 w-full font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded'}>
-                    CALCULATE
+                    CALCULATE CURRENT ASSETS AND CURRENT LIABILITIES
                 </button><br/>
-                <button disabled={(click)} className={click ? "bg-gray-500 text-white mt-2 mb-2 w-full font-bold py-2 px-4 border-b-4 border-gray-700 rounded" : "bg-blue-500 mt-2 hover:bg-red-400 text-white w-full mt-2 mb-2 font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"}>
+                <button disabled={(click)} className={click ? "bg-gray-500 text-white mt-2 mb-2 w-full font-bold py-2 px-4 border-b-4 border-gray-700 rounded" : "bg-blue-500 hover:bg-red-400 text-white w-full mt-2 mb-2 font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"}>
                     RESET
                 </button>
             </div>

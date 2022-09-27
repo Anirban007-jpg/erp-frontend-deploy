@@ -3,7 +3,7 @@ import {FaLockOpen} from 'react-icons/fa'
 import { casa } from '../actions/ratio';
 
 
-const CasaCalulator = () => {
+const CasaCalulator = (props) => {
 
     const [values,setValues] = useState({
         current_deposits_savings_deposits : "",
@@ -28,20 +28,25 @@ const CasaCalulator = () => {
         e.preventDefault();
         setValues({...values, loading: true})
         const data ={current_deposits_savings_deposits, total_deposits}
+        
         casa(data).then(data => {
             if (data.error){
                 setValues({...values, error: data.error,loading: false});
             }
             else {
+                props.onSubmit(data);
                 setValues({
                     ...values, 
                     current_deposits_savings_deposits: "",
                     total_deposits: "",
                     casa_ratio: data.result,
-                    loading: false
+                    loading: false,
             })
             }
         })
+
+
+        
     }
 
     return (
@@ -54,17 +59,17 @@ const CasaCalulator = () => {
             :
             ''
         }
-        <h1 className="font-bold text-2xl text-yellow-500">Calculators:</h1>
+        <h1 className="font-bold text-2xl text-yellow-500">Current and Savings Account Ratio Calculator:</h1>
         <form className="bg-gray-700 p-4 mt-4 mx-6 rounded-lg text-center" noValidate>
             <div className="relative flex w-full flex-wrap items-stretch mb-3">
-                <input value={current_deposits_savings_deposits} onChange={handleChange('current_deposits_savings_deposits')} type="text" placeholder="Enter Current Deposits" className="px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-white bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full pr-10"/>
-                <span className="leading-snug font-normal absolute text-center text-slate-300 absolute bg-transparent rounded text-base items-center justify-center w-8 right-0 pr-3 py-3">
+                <input value={current_deposits_savings_deposits} onChange={handleChange('current_deposits_savings_deposits')} type="text" placeholder="Enter Current Deposits" className="px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full pr-10"/>
+                <span className="leading-snug font-normal absolute text-center text-slate-300 bg-transparent rounded text-base items-center justify-center w-8 right-0 pr-3 py-3">
                 <FaLockOpen></FaLockOpen>
                 </span>
             </div>
             <div className="relative flex w-full flex-wrap items-stretch mb-3">
-                <input value={total_deposits} onChange={handleChange('total_deposits')} type="text" placeholder="Enter Total Deposits" className="px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-white bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full pr-10"/>
-                <span className="leading-snug font-normal absolute text-center text-slate-300 absolute bg-transparent rounded text-base items-center justify-center w-8 right-0 pr-3 py-3">
+                <input value={total_deposits} onChange={handleChange('total_deposits')} type="text" placeholder="Enter Total Deposits" className="px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full pr-10"/>
+                <span className="leading-snug font-normal absolute text-center text-slate-300 bg-transparent rounded text-base items-center justify-center w-8 right-0 pr-3 py-3">
                 <FaLockOpen></FaLockOpen>
                 </span>
             </div>
