@@ -132,45 +132,44 @@ const rcalculator = () => {
                           <input type="text" onChange={handleChange('Company_address')} className="mt-4 px-12 py-2 font-bold text-black placeholder-slate-300 relative bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full pr-10"/>
                           <span className="leading-snug font-normal absolute text-center text-slate-300 bg-transparent rounded text-base items-center justify-center w-8 right-0 pr-3 py-3">
                           </span>
-                    </div>
-                    <hr className="border-gray-700 mt-4"/>
+                    </div><br/>
                     <div className="mt-2">
                           <span className="text-0.5xl text-white font-bold mt-2">Company CEO:</span><br/>
                           <input type="text" onChange={handleChange('Company_CEO')} className="mt-4 px-12 py-2 font-bold text-black placeholder-slate-300 relative bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full pr-10"/>
                           <span className="leading-snug font-normal absolute text-center text-slate-300 bg-transparent rounded text-base items-center justify-center w-8 right-0 pr-3 py-3">
                           </span>
                     </div>
-                    <hr className="border-gray-700 mt-4"/>
+                    <br/>
                     <div className="mt-2">
                           <span className="text-0.5xl text-white font-bold mt-2">Established Since:</span>{" "}
                           <input type="text" onChange={handleChange('Established_since')} className="mt-4 px-12 py-2 width-4 font-bold text-black placeholder-slate-300 relative bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full pr-10"/>
                           <span className="leading-snug font-normal absolute text-center text-slate-300 bg-transparent rounded text-base items-center justify-center w-8 right-0 pr-3 py-3">
                           </span>
                     </div>
-                    <hr className="border-gray-700 mt-4"/>
+                    <br/>
                     <div className="mt-2">
                           <span className="text-0.5xl text-white font-bold mt-2">Assessment Year:</span><br/>
                           <input type="text" value={AY} onChange={handleChange('AY')} className="mt-4 px-12 py-2 width-4 font-bold text-black placeholder-slate-300 relative bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full pr-10"/>
                           <span className="leading-snug font-normal absolute text-center text-slate-300 bg-transparent rounded text-base items-center justify-center w-8 right-0 pr-3 py-3">
                           </span>
                     </div>
-                    <hr className="border-gray-700 mt-4"/>
+                    <br/>
                     <div className="mt-2">
                           <span className="text-0.5xl text-white font-bold mt-2">No of Directors:</span><br/>
                           <input type="text" onChange={handleChange('no_of_directors')} className="mt-4 px-12 py-2 font-bold text-black placeholder-slate-300 relative bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full pr-10"/>
                           <span className="leading-snug font-normal absolute text-center text-slate-300 bg-transparent rounded text-base items-center justify-center w-8 right-0 pr-3 py-3">
                           </span>
                     </div>
-                    <hr className="border-gray-700 mt-4"/>
+                    <br/>
                     <div className="mt-2">
                           <span className="text-0.5xl text-white font-bold mt-2">Annual Revenue:</span><br/>
                           <input type="text" onChange={handleChange('Annual_Revenue')} className="mt-4 px-12 py-2 font-bold text-black placeholder-slate-300 relative bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full pr-10"/>
                           <span className="leading-snug font-normal absolute text-center text-slate-300 bg-transparent rounded text-base items-center justify-center w-8 right-0 pr-3 py-3">
                           </span>
                     </div>
-                    <hr className="border-gray-700 mt-4"/>
+                    <br/>
                     <div className="mt-2">
-                        <span className="text-0.5xl text-white font-bold mt-2">Assessment Year:</span><br/>
+                        <span className="text-0.5xl text-white font-bold mt-2">Details of Directors and Related persons:</span><br/>
                         <textarea type="text" rows="13" onChange={handleChange('details_of_directors')} className="mt-4 px-12 py-2 width-4 font-bold text-black placeholder-slate-300 relative bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full pr-10"/>
                         <span className="leading-snug font-normal absolute text-center text-slate-300 bg-transparent rounded text-base items-center justify-center w-8 right-0 pr-3 py-3">
                         </span>

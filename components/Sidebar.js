@@ -3,7 +3,7 @@ import {withRouter} from "next/router";
 import Router from 'next/router';
 import Link from 'next/link';
 import {MdLogout} from 'react-icons/md';
-import { FaCalculator, FaHome } from 'react-icons/fa';
+import { FaAtlas, FaCalculator, FaHome } from 'react-icons/fa';
 import { logout } from '../actions/auth';
 import { API_NAME } from '../config';
 
@@ -34,6 +34,15 @@ const Sidebar = ({router}) => {
                     <Link href="/Common/rcalculator">
                         <a>
                           <FaCalculator size={20} className={router.pathname === "/Common/rcalculator" ? "text-white rounded shadow-primary bg-orange-500": ""} />
+                        </a>
+                    </Link>
+                </button>
+            </div>
+            <div className={ router.pathname === "/Common/tvcalculator" ? "bg-gray-800 rounded-l-xl relative before:absolutebefore:h-8 before:w-4 before:-top-8 before:rounded-br-xl before:right-0":""}>
+                <button className="p-4 my-4 mr-4 ml-3 rounded-xl">
+                    <Link href="/Common/tvcalculator">
+                        <a>
+                          <FaAtlas size={20} className={router.pathname === "/Common/tvcalculator" ? "text-white rounded shadow-primary bg-orange-500": ""} />
                         </a>
                     </Link>
                 </button>

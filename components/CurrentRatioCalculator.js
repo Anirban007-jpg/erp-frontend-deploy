@@ -537,19 +537,19 @@ const CurrentRatioCalculator = (props) => {
             <hr style={{'border': '1px solid white', 'marginTop':'4px'}} />
             <div className="mt-2 bg-stone-200 mr-2 ml-2 rounded-lg">
                 <div className="flex space-x-4 mr-2 ml-2 mt-2">
-                    <div className="relative mb-3 w-1/3">
+                    <div className="relative mb-3 w-1/3 mt-4">
                         <span className="text-sm font-bold mb-4">SUNDRY CREDITORS</span><br/>
                         <input type="text" value={Creditors} onChange={handleChange('Creditors')} placeholder="Income Tax Refund Amount" className="mt-4 px-3 py-3 placeholder-slate-300 text-black font-bold relative bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full pr-10"/>
                         <span className="leading-snug font-normal absolute text-center text-slate-300 bg-transparent rounded text-base items-center justify-center w-8 right-0 pr-3 py-3">
                         </span>
                     </div>
-                    <div className="relative items-stretch mb-3 w-1/3">
+                    <div className="relative items-stretch mb-3 w-1/3 mt-4">
                         <span className="text-sm font-bold mb-4">BILLS PAYABLE</span><br/>
                         <input type="text" value={BP} onChange={handleChange('BP')} placeholder="Income Tax Refund Amount" className="mt-4 px-3 py-3 placeholder-slate-300 text-black font-bold relative bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full pr-10"/>
                         <span className="leading-snug font-normal absolute text-center text-slate-300 bg-transparent rounded text-base items-center justify-center w-8 right-0 pr-3 py-3">
                         </span>
                     </div>
-                    <div className="relative items-stretch mb-3 w-1/3">
+                    <div className="relative items-stretch mb-3 w-1/3 mt-4">
                         <span className="text-sm font-semibold text-red-500 mb-4">TRADE PAYABLES</span>
                         <input type="text" value={Trade_Payables} placeholder="Trade Payables(Auto-Calculated)" disabled className="mt-3 px-3 py-3 bg-gray-300 placeholder-slate-300 text-red-500 font-bold relative rounded text-0.5xl border-0 shadow outline-none focus:outline-none focus:ring w-full pr-10"/>
                         <span className="leading-snug font-normal absolute text-center text-red-500 bg-transparent rounded text-base items-center justify-center w-8 right-0 pr-3 py-3">
@@ -704,15 +704,15 @@ const CurrentRatioCalculator = (props) => {
                     </div>
                 </div> 
                 <br/>
-                <h1 className="text-blue-500 font-bold mt-2">CURRENT ASSETS:</h1>
+            </div><br/>
+            <h1 className="text-blue-500 font-bold mt-2">CURRENT ASSETS:</h1>
                 <div className="flex space-x-4 mt-2 mr-2 ml-2">
                     <div className="relative mb-3 w-full">
                         <input type="text" value={ca} placeholder="Current Assets(Auto-Calculated)" disabled className="mt-2 px-3 py-3 bg-gray-300 placeholder-slate-300 text-blue-500 font-bold relative rounded text-0.5xl border-0 shadow outline-none focus:outline-none focus:ring w-full pr-10"/>
                         <span className="leading-snug font-normal absolute text-center text-red-500 bg-transparent rounded text-base items-center justify-center w-8 right-0 pr-3 py-3">
                         </span>
                     </div>
-                </div>
-                <hr/>
+                </div><br/>
                 <h1 className="text-blue-500 font-bold mt-2">CURRENT LIABILITIES:</h1>
                 <div className="flex space-x-4 mt-2 mr-2 ml-2">
                     <div className="relative mb-3 w-full">
@@ -721,7 +721,7 @@ const CurrentRatioCalculator = (props) => {
                         </span>
                     </div>
                 </div>
-                <hr/>
+                <br/>
                 <h1 className="text-blue-500 font-bold mt-2">WORKING CAPITAL:</h1>
                 <div className="flex space-x-4 mt-2 mr-2 ml-2">
                     <div className="relative mb-3 w-full">
@@ -731,7 +731,6 @@ const CurrentRatioCalculator = (props) => {
                     </div>
                 </div>
                 <br/> 
-            </div>
             <div className="mt-2 bg-gray-400 rounded-lg">
                 {/* Design this area*/}
                 {Current_Ratio}
