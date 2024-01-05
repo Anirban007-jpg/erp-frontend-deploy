@@ -56,14 +56,13 @@ const LoginForm = () => {
   return (
         <>
         {error ? 
-            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" style={{"marginTop":"50px", "marginLeft":"400px", "paddingLeft":"400px"}} role="alert">
-            <strong className="font-bold">Holy smokes! </strong>
-            <span className="block sm:inline">{error}</span>
+            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" style={{"marginTop":"47px", "marginLeft":"5px","marginRight":"5px", "paddingLeft":"0px", "marginBottom":"-39px"}} role="alert">
+            <strong className="font-bold" style={{"marginLeft":"50px"}}>Holy smokes! </strong><span className="block sm:inline">{error}</span>
             </div> 
             :
             ''
         }
-
+        
         <div className="flex flex-col md:flex-row h-screen items-center">
             <div className="h-screen lg:block md:w-1/2 xl:w-2/3">
                 <img className="w-full h-full mt-10 object-cover" src="https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?cs=srgb&dl=pexels-anjana-c-674010.jpg&fm=jpg" alt="" />

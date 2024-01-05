@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { isAuth } from '../../actions/auth'
 import Footer from '../../components/Footer'
 import Sidebar from '../../components/Sidebar'
+import TvCalculator from '../../components/TvCalculator'
 
 
 const tvcalculator = () => {
@@ -31,7 +32,7 @@ const tvcalculator = () => {
   
   return (
     <div>
-      <div className="flex w-full min-h-screen font-sans bg-gray-800">
+      <div className="flex w-full min-h-screen font-sans bg-gray-500">
           <Sidebar/>
           <main className="flex flex-col flex-1 gap-6 p-4">
             <header>
@@ -41,7 +42,9 @@ const tvcalculator = () => {
               </div>
             </header>
             <hr className="border-gray-700" />
-          
+            <div>
+              <TvCalculator />
+            </div>
           </main>
       </div>
       
